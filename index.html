@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      var context = canvas.getContext('2d');
+
+      var colours = [
+        '#7FDBFF',
+        '#0074D9',
+        '#001F3F',
+        '#39CCCC',
+        '#2ECC40',
+        '#3D9970',
+        '#01FF70',
+        '#FFDC00',
+        '#FF851B',
+        '#FF4136',
+        '#F012BE',
+        '#B10DC9',
+        '#85144B',
+      ];
+
+      var tilesTop = 0;
+      var tilesLeft = 0;
+      var tileSize = 40;
+      var tileCountLeft = 35;
+      var tileCountTop = 55;
+
+      var drawMosaic = function(canvas, context){
+        var tilesTop = 0;
+        var tilesLeft = 0;
+        var tileSize = 40;
+        var tileCountLeft = 35;
+        var tileCountTop = 55;
+        context.beginPath();
+        for(var x=0; x<1400; x++){
+          context.fillStyle = colours[Math.floor(Math.random() * colours.length)];
+          context.fillRect(tilesTop * tileSize,tilesLeft*tileSize,tileSize,tileSize);
+          if(tilesTop < tileCountTop){
+            tilesTop++;
+          } else {
+            tilesTop = 0;
+            tilesLeft++;
+          }
+          if(tilesLeft == tileCountLeft){
+            break;
+          }
+        };
+      }
+
+      var fps = 2;
+      var fpsInterval=1000/fps;
+      var then=Date.now();
+      var startTime=then;
+      var animate = function(canvas, context){
+        requestAnimationFrame(function(){
+          animate(canvas, context);
+        });
+        var now = Date.now();
+        var elapsed = now - then;
+
+        // if enough time has elapsed, draw the next frame
+        if (elapsed > fpsInterval) {
+          // Get ready for next frame by setting then=now, but also adjust for your
+          // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+          then = now - (elapsed % fpsInterval);
+          // Put your drawing code here
+          context.clearRect(0,0,canvas.width, canvas.height);
+          drawMosaic(canvas, context);
+        }
+      }
+      drawMosaic(canvas, context);
+
+      setTimeout(function(){
+        animate(canvas, context);
+      },1000);
+
+    </script>
+  </body>
+</html>
