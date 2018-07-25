@@ -1,0 +1,23 @@
+{
+  "name": "joezo.github.io",
+  "version": "1.0.0",
+  "description": "joezo.github.io",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joezo/joezo.github.io.git"
+  },
+  "author": "Joe Warren <joe@joezo.com>",
+  "license": "none",
+  "bugs": {
+    "url": "https://github.com/Joezo/joezo.github.io/issues"
+  },
+  "homepage": "https://github.com/Joezo/joezo.github.io#readme",
+  "devDependencies": {
+    "serve": "^9.3.0"
+  }
+}
